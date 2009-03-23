@@ -1,0 +1,5 @@
+## Interface: 11000
+## Title: Perl Classic Xp Frame
+## Notes: Displays a movable xp frame to replace the default.
+## SavedVariables: Perl_Xp_Config
+Perl_Classic_Xp.xml

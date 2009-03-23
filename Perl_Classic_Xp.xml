@@ -1,0 +1,113 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+	<Script file="Perl_Classic_Xp.lua"/>
+
+		<Frame name="Perl_Classic_Xp_Frame" movable="true" parent="UIParent" hidden="true" enableMouse="true">
+			<Size>
+				<AbsDimension x="200" y="25"/>
+			</Size>
+			<Anchors>
+				<Anchor point="CENTER"/>
+			</Anchors>
+            
+			<!-- Script Events -->
+			<Scripts>
+				<OnLoad>
+					Perl_Xp_OnLoad();
+				</OnLoad>
+				<OnEvent>
+					Perl_Xp_OnEvent( event );
+				</OnEvent>
+				<OnMouseDown>
+                    if( arg1 == "LeftButton" and Perl_Xp_GetVar( "Locked" ) == 0 ) then
+		                this:StartMoving();
+	                end
+				</OnMouseDown>
+				<OnMouseUp>
+			        this:StopMovingOrSizing();
+				</OnMouseUp>
+			</Scripts>
+			
+			<Backdrop bgFile="Interface\Tooltips\UI-Tooltip-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
+				<EdgeSize>
+					<AbsValue val="16"/>
+				</EdgeSize>
+				<TileSize>
+					<AbsValue val="16"/>
+				</TileSize>
+				
+				<BackgroundInsets>
+					<AbsInset left="5" right="5" top="5" bottom="5"/>
+				</BackgroundInsets>				
+			</Backdrop>
+			
+			<Frames>
+				<StatusBar name="$parent_Bar" inherits="TextStatusBar">
+					<Size>
+						<AbsDimension x="180" y="11"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="10" y="-7"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					
+					<BarTexture name="$parent_Tex" file="Interface\TargetingFrame\UI-StatusBar"/>
+                    <BarColor r="0.6" g="0" b="0.6"/>
+                    <Layers>
+                        <!-- Text -->
+                        <Layer level="OVERLAY">
+                            <Fontstring name="$parent_Text" inherits="GameFontNormalSmall" text="Error!">
+                                <Anchors>
+                                    <Anchor point="TOP" relativePoint="TOP">
+                                        <Offset>
+                                            <AbsDimension x="0" y="0"/>
+                                        </Offset>
+                                    </Anchor>
+                                </Anchors>
+                                <Color r="1" g="1" b="1" />
+                            </Fontstring>
+                        </Layer>
+                    </Layers>
+				</StatusBar>
+                
+				<StatusBar name="$parent_Bar_Bg" inherits="TextStatusBar">
+					<Size>
+						<AbsDimension x="180" y="10"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOP" relativePoint="TOP" relativeTo="Perl_Xp_XPBar">
+							<Offset>
+								<AbsDimension x="0" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					
+					<BarTexture file="Interface\TargetingFrame\UI-TargetingFrame-BarFill"/>
+                    <BarColor r="0.6" g="0" b="0.6" a="0.25"/>
+                    <Scripts>
+                        <OnLoad>
+                            this:SetFrameLevel( this:GetFrameLevel() - 1 );
+                        </OnLoad>
+                    </Scripts>
+				</StatusBar>
+                
+				<StatusBar name="$parent_Bar_Rest" inherits="TextStatusBar">
+					<Size>
+						<AbsDimension x="180" y="10"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOP" relativePoint="TOP" relativeTo="Perl_Xp_XPBar">
+							<Offset>
+								<AbsDimension x="0" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<BarTexture  name="$parent_Tex" file="Interface\TargetingFrame\UI-TargetingFrame-BarFill"/>
+                    <BarColor r="0.3" g="0.3" b="0.6" a="0.5"/>
+				</StatusBar>
+			</Frames>
+		</Frame>
+</Ui>
